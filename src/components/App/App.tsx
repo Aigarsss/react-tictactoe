@@ -29,6 +29,8 @@ const checkWinner = (board) => {
 const App = () => {
   const [board, setBoard] = useState(new Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
+  const [history, setHistory] = useState([]);
+  const [step, setStep] = useState(0);
 
   const winner = checkWinner(board);
   const status = !winner ? `${isXNext ? 'X' : 'O'} make your move` : `${winner} has won`;
@@ -39,11 +41,27 @@ const App = () => {
     }
     let boardCopy = [...board];
     boardCopy[i] = isXNext ? 'X' : 'O';
+
+    setHistory( [...history, [...boardCopy]] );
     setIsXNext(!isXNext);
     setBoard(boardCopy);
   }
 
-  return <Board board={board} handleClick={handleClick} status={status} />
+  const handleHistoryClick = (i) => {
+    setBoard(history[i]);
+    i % 2 === 0 ? setIsXNext(false) : setIsXNext(true);
+    setStep(i);
+  }
+
+  console.log(history)
+
+  return <Board 
+            board={board} 
+            handleClick={handleClick} 
+            status={status} 
+            history={history}
+            handleHistoryClick={handleHistoryClick}
+        />
 }
 
 export default App

@@ -1,3 +1,11 @@
+.container {
+  display: flex;
+  margin-top: 100px;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
 .board {
   display: flex;
   flex-direction: column;
@@ -5,4 +13,10 @@
   .row {
     display: flex;
   }
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
