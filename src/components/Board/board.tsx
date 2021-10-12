@@ -28,15 +28,10 @@ const Board = ({board, handleClick, status, history, handleHistoryClick}) => {
             <div className="history">
                 History:
                 <ul>
-                    <li>
-                    <button onClick={() => handleHistoryClick(0)}>
-                                Go back to start
-                            </button>
-                    </li>
                     {history.length > 0 && history.map((item, key) => {
                         return <li key={key}>
                             <button onClick={() => handleHistoryClick(key)}>
-                                Go back to move {key+1}
+                                {key ? `Go back to move ${key}` : `restart`}
                             </button>
                         </li>
                     })}

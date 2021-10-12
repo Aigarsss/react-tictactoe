@@ -29,7 +29,7 @@ const checkWinner = (board) => {
 const App = () => {
   const [board, setBoard] = useState(new Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState([new Array(9).fill(null)]);
   const [step, setStep] = useState(0);
 
   const winner = checkWinner(board);
@@ -39,13 +39,16 @@ const App = () => {
     if (board[i] || winner) {
       return
     }
+    setStep(step + 1);
+
     let boardCopy = [...board];
     boardCopy[i] = isXNext ? 'X' : 'O';
-
     setHistory( [...history, [...boardCopy]] );
     setIsXNext(!isXNext);
     setBoard(boardCopy);
   }
+
+  console.log(history)
 
   const handleHistoryClick = (i) => {
     setBoard(history[i]);
@@ -53,7 +56,7 @@ const App = () => {
     setStep(i);
   }
 
-  console.log(history)
+  console.log(step);
 
   return <Board 
             board={board} 
