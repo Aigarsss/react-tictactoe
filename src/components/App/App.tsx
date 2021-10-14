@@ -31,30 +31,29 @@ const App = () => {
   const [history, setHistory] = useState([new Array(9).fill(null)]);
   const [step, setStep] = useState(0);
 
-  const winner = checkWinner(history[history.length-1]);
+  const winner = checkWinner(history[step]);
   const status = !winner ? `${isXNext ? 'X' : 'O'} make your move` : `${winner} has won`;
 
-  // console.log(history);
+  console.log(history)
 
   const handleClick = (i) => {
-    console.log(history)
     const historyCopy = history.slice(0, step + 1);
-    console.log(history.slice(0, step + 1))
-    let currentBoard = historyCopy[historyCopy.length - 1];
+    // Create a copy of the current board value
+    let currentBoard = historyCopy[historyCopy.length - 1].slice();
 
-    if (history[history.length - 1][i] || winner) {
+    if (currentBoard[i] || winner) {
       return
     }
 
     currentBoard[i] = isXNext ? 'X' : 'O';
-    setHistory([...historyCopy, [...currentBoard]]);
+    setHistory([...historyCopy, currentBoard]);
     setIsXNext(!isXNext);
     setStep(history.length);
   }
 
-  const handleHistoryClick = (i) => {
-    i % 2 === 0 ? setIsXNext(false) : setIsXNext(true);
-    setStep(i);
+  const handleHistoryClick = (move) => {
+    move % 2 === 0 ? setIsXNext(true) : setIsXNext(false);
+    setStep(move);
   }
 
   return <Board 

@@ -37,6 +37,7 @@ const Board = ({handleClick, status, history, handleHistoryClick, step}) => {
                     {history.map((item, key) => {
                         return <li key={key}>
                             <button onClick={() => handleHistoryClick(key)}>
+                                {history[key]}
                                 {key ? `Go back to move ${key}` : `Game start`}
                             </button>
                         </li>
